@@ -1,0 +1,57 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "floodscope"
+version = "0.1.0"
+description = "Flood-extent change detection from public Sentinel-1 SAR imagery -- sees through cloud cover, no downloads required."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Seongjun Lee", email = "seongjunlee4473@gmail.com" }]
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: GIS",
+]
+dependencies = [
+    "pystac>=1.10",
+    "pystac-client>=0.8",
+    "rasterio>=1.3",
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "typer>=0.12",
+    "rich>=13.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+demo = [
+    "matplotlib>=3.8",
+    "jupyter>=1.0",
+]
+
+[project.scripts]
+floodscope = "floodscope.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/SeongjunLee4473/floodscope"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/floodscope"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.pytest.ini_options]
+markers = [
+    "integration: hits real public STAC/COG endpoints over the network",
+]
+filterwarnings = [
+    "ignore:Setting the shape on a NumPy array.*:DeprecationWarning",
+]
