@@ -47,9 +47,8 @@ def read_geocoded_band(
     numbers, 0 = no data) and ``transform``/``crs`` describe its real-world grid.
     """
     href = _to_public_https(href)
-    with rasterio.open(href) as src:
-        with WarpedVRT(src, crs=crs, resampling=resampling) as vrt:
-            window = from_bounds(*bbox, transform=vrt.transform).round_lengths().round_offsets()
-            data = vrt.read(1, window=window)
-            transform = vrt.window_transform(window)
+    with rasterio.open(href) as src, WarpedVRT(src, crs=crs, resampling=resampling) as vrt:
+        window = from_bounds(*bbox, transform=vrt.transform).round_lengths().round_offsets()
+        data = vrt.read(1, window=window)
+        transform = vrt.window_transform(window)
     return data, transform, CRS.from_user_input(crs)

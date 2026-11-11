@@ -9,13 +9,13 @@ from floodscope.search import filter_same_orbit, find_nearest_item, search_items
 __version__ = "0.1.0"
 
 __all__ = [
-    "search_items",
-    "find_nearest_item",
-    "filter_same_orbit",
-    "read_geocoded_band",
-    "to_db",
+    "FloodResult",
     "despeckle",
     "detect_flood",
-    "FloodResult",
     "export_cog",
+    "filter_same_orbit",
+    "find_nearest_item",
+    "read_geocoded_band",
+    "search_items",
+    "to_db",
 ]
